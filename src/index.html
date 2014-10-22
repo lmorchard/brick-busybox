@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>brick-busybox</title>
+
+    <script src="bower_components/brick/dist/platform/platform.js"></script>
+    <link rel="import" href="bower_components/brick/dist/brick.html">
+
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="main.css" type="text/css">
+
+  </head>
+  <body>
+
+    <brick-layout>
+      <header>
+
+        <brick-appbar>
+          <button>☰</button>
+          <h1>brick-busybox</h1>
+          <button>?</button>
+        </brick-appbar>
+
+      </header>
+
+      <brick-layout>
+
+        <brick-tabbar id="bar1">
+          <brick-tabbar-tab target="card0" selected>
+            <i class="fa fa-rotate-right"></i> Flipbox
+          </brick-tabbar-tab>
+          <brick-tabbar-tab target="card1">
+            <i class="fa fa-camera-retro"></i> One
+          </brick-tabbar-tab>
+          <brick-tabbar-tab target="card2">
+            <i class="fa fa-envelope"></i> Two
+          </brick-tabbar-tab>
+          <brick-tabbar-tab target="card3">
+            <i class="fa fa-home"></i> Three
+          </brick-tabbar-tab>
+          <brick-tabbar-tab target="card4">
+            <i class="fa fa-home"></i> Four
+          </brick-tabbar-tab>
+        </brick-tabbar>
+
+        <brick-deck id="deck1" selected-index="0">
+
+          <brick-card id="card0" selected>
+
+            <brick-action target="flipbox1" action="toggle">
+              <button id="fliptoggle">Flip it!</button>
+            </brick-action>
+
+            <brick-flipbox id="flipbox1">
+              <div>front</div>
+              <div>back</div>
+            </brick-flipbox>
+
+          </brick-card>
+
+          <brick-card id="card1">1</brick-card>
+
+          <brick-card id="card2">2</brick-card>
+
+          <brick-card id="card3">3</brick-card>
+
+          <brick-card id="card4">4</brick-card>
+
+        </brick-deck>
+
+      </brick-layout>
+    </brick-layout>
+
+    <script>
+
+    </script>
+
+  </body>
+</html>

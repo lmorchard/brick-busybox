@@ -11,6 +11,8 @@ https://lmorchard.github.io/brick-busybox
 npm install
 bower install
 gulp build
+gulp watch
+# open http://localhost:3001/
 ```
 
 ## TODO
