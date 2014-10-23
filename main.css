@@ -28,3 +28,6 @@ button#fliptoggle {
 #flipbox1 > div:last-child {
   background: #cce;
 }
+#card-select form {
+  padding: 1em;
+}
