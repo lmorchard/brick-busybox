@@ -1,5 +1,4 @@
 (function () {
-
   var BrickActionElementPrototype = Object.create(HTMLElement.prototype);
 
   function cleanupHandler(el) {
