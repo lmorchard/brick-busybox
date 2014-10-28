@@ -43,14 +43,12 @@
           <brick-tabbar-tab target="card2">
             <i class="fa fa-calendar"></i> Calendar
           </brick-tabbar-tab>
-          <!--
           <brick-tabbar-tab target="card3">
-            <i class="fa fa-home"></i> Three
+            <i class="fa fa-bars"></i> Menu
           </brick-tabbar-tab>
           <brick-tabbar-tab target="card4">
-            <i class="fa fa-home"></i> Four
+            <i class="fa fa-database"></i> IndexedDB
           </brick-tabbar-tab>
-          -->
         </brick-tabbar>
 
         <brick-deck id="deck1" selected-index="0">
@@ -144,11 +142,42 @@
             <brick-calendar controls multiple span="4"></brick-calendar>
           </brick-card>
 
-          <!--
-          <brick-card id="card3">3</brick-card>
+          <brick-card id="card3">
+             <brick-menu>
+               <brick-item selected>Item 1</brick-item>
+               <brick-item>Item 2</brick-item>
+               <brick-item>Item 3</brick-item>
+               <brick-item>Item 4</brick-item>
+             </brick-menu>
+          </brick-card>
 
-          <brick-card id="card4">4</brick-card>
-          -->
+          <brick-card id="card4">
+
+            <brick-action target="thingy" action="clear">
+              <button>Clear all</button>
+            </brick-action>
+
+            <brick-action target="thingy" action="dump">
+              <button>Dump all</button>
+            </brick-action>
+
+            <brick-action target="thingy" action="put_alpha">
+              <button>Put: alpha</button>
+            </brick-action>
+
+            <brick-action target="thingy" action="put_beta">
+              <button>Put: beta</button>
+            </brick-action>
+
+            <brick-action target="thingy" action="put_gamma">
+              <button>Put: gamma</button>
+            </brick-action>
+
+            <busybox-thingy id="thingy" storage="play"></busybox-thingy>
+
+            <brick-storage-indexeddb name="play"></brick-storage-indexeddb>
+
+          </brick-card>
 
         </brick-deck>
 
