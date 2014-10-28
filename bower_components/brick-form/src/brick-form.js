@@ -37,7 +37,6 @@
 
   BrickFormElementPrototype.loadFormData = function () {
     var self = this;
-    console.log('LOADFORMDATA ' + self.name);
     if (!self.name) {
       return;
     }
