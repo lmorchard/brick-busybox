@@ -153,6 +153,8 @@
 
           <brick-card id="card4">
 
+            <brick-storage-indexeddb id="play" name="play" keyname="id"></brick-storage-indexeddb>
+
             <brick-action target="thingy" action="clear">
               <button>Clear all</button>
             </brick-action>
@@ -173,9 +175,26 @@
               <button>Put: gamma</button>
             </brick-action>
 
-            <busybox-thingy id="thingy" storage="play"></busybox-thingy>
+            <p>
+              <label for="formId">Id:</label>
+              <input id="formId" type="text">
+              <brick-action target="exampleForm" action="loadFormData">
+                <button name="load">Load Form</button>
+              </brick-action>
+            </p>
 
-            <brick-storage-indexeddb name="play"></brick-storage-indexeddb>
+            <brick-form id="exampleForm" name="1001" storage="play">
+              <label for="name">Name:</label>
+                <input type="text" name="name" width="20">
+              <label for="created">Created:</label>
+                <input type="text" name="created" width="20">
+              <button name="save">Save Form</button>
+            </brick-form>
+
+            <brick-action target="exampleForm" action="saveFormData">
+            </brick-action>
+
+            <busybox-storage-demo id="thingy" storage="play"></busybox-storage-demo>
 
           </brick-card>
 
@@ -185,7 +204,11 @@
     </brick-layout>
 
     <script>
-
+      var form = document.getElementById('exampleForm');
+      var formId = document.getElementById('formId');
+      formId.addEventListener('change', function (e) {
+        form.name = e.target.value;
+      });
     </script>
 
   </body>

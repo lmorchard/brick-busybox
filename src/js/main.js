@@ -13,15 +13,12 @@
     root.appendChild(importDoc.body.firstChild.cloneNode(true));
 
     if (this.hasAttribute('storage')) {
-      var name = this.getAttribute('storage');
-      var sel = 'brick-storage-indexeddb[name=' + name + ']';
-      this.storage = document.querySelector(sel);
+      this.storage = document.getElementById(this.getAttribute('storage'));
     }
   };
 
   ElementPrototype.attachedCallback = function () {
     this.appendChild(this.root);
-    console.log("busybox-thingy attached");
   };
 
   ElementPrototype.detachedCallback = function () {
@@ -50,6 +47,7 @@
       objs.forEach(function (obj) {
         $this.log(JSON.stringify(obj));
       });
+      $this.log("DONE DUMPING DB RECORDS");
     });
   };
 
@@ -66,7 +64,7 @@
     };
   });
 
-  window.BrickStorageIndexeddbElement = document.registerElement('busybox-thingy', {
+  document.registerElement('busybox-storage-demo', {
     prototype: ElementPrototype
   });
 
