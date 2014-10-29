@@ -13,5 +13,11 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "brick-input": "mozbrick/brick-input",
+    "brick-select": "mozbrick/brick-select",
+    "brick": "mozbrick/brick#~2.0.0",
+    "brick-progressbar": "mozbrick/brick-progressbar"
+  }
 }

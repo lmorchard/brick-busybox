@@ -18,7 +18,11 @@
   };
 
   ElementPrototype.attachedCallback = function () {
+    var $this = this;
     this.appendChild(this.root);
+    setTimeout(function () {
+      $this.dump();
+    }, 0.1);
   };
 
   ElementPrototype.detachedCallback = function () {
@@ -34,32 +38,36 @@
 
   ElementPrototype.clear = function () {
     var $this = this;
-    $this.log("CLEARING DB RECORDS");
+    $this.log("Clearing db records...");
     $this.storage.clear().then(function (objs) {
-      $this.log("DONE CLEARING DB RECORDS");
+      $this.log("Done clearing db records");
+    }).catch(function (err) {
+      $this.log("ERR CLEARING " + err);
     });
   };
 
   ElementPrototype.dump = function () {
     var $this = this;
-    $this.log("DUMPING DB RECORDS");
+    $this.log("Dumping db records...");
     $this.storage.getMany().then(function (objs) {
       objs.forEach(function (obj) {
         $this.log(JSON.stringify(obj));
       });
-      $this.log("DONE DUMPING DB RECORDS");
+      $this.log("Done dumping db records");
     });
   };
 
   ['alpha', 'beta', 'gamma'].forEach(function (name) {
-    ElementPrototype['put_' + name] = function () {
+    ElementPrototype['set_' + name] = function () {
       var $this = this;
       var obj = {
-        name: name,
-        created: Date.now()
+        _id: name,
+        note: 'Updated at ' + Date.now()
       };
-      $this.storage.insert(obj).then(function (key) {
-        $this.log("PUT " + name + ": " + key + " = " + JSON.stringify(obj));
+      $this.storage.set(obj).then(function (key) {
+        $this.log("Set " + key + " = " + JSON.stringify(obj));
+      }).catch(function (err) {
+        $this.log("ERR SET " + err.name);
       });
     };
   });
