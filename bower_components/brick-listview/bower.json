@@ -1,0 +1,30 @@
+{
+  "name": "brick-listview",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mozbrick/brick-listview",
+  "authors": [
+    "mozilla"
+  ],
+  "description": "A storage-backed scrolling list",
+  "main": "dist/brick-listview.html",
+  "keywords": [
+    "brick",
+    "webcomponents"
+  ],
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "brick-common": "~0.1.3",
+    "platform": "Polymer/platform"
+  },
+  "devDependencies": {
+    "platform": "Polymer/platform",
+    "brick-storage-indexeddb": "mozbrick/brick-storage-indexeddb#master"
+  }
+}
