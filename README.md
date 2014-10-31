@@ -17,6 +17,7 @@ gulp watch
 
 ## TODO
 
+* Figure out why there are font & layout differences between localhost and gh-pages
 * Use [`<brick-listview>`](https://github.com/mozbrick/brick-listview)
 * Use [`<brick-button>`](https://github.com/mozbrick/brick-button)
 
