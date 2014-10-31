@@ -13,6 +13,9 @@
     <!-- Non-core import style components -->
     <link rel="import" href="bower_components/brick-input/dist/brick-input.html">
     <link rel="import" href="bower_components/brick-progressbar/dist/brick-progressbar.html">
+    <link rel="import" href="bower_components/brick-listview/dist/brick-listview.html">
+    <link rel="import" href="bower_components/brick-dialog/dist/brick-dialog.html">
+    <link rel="import" href="bower_components/brick-action-menu/dist/brick-action-menu.html">
 
     <!-- JS lib style components -->
     <link rel="stylesheet" href="bower_components/brick-select/dist/brick-select.css">
@@ -30,8 +33,22 @@
         <brick-appbar>
           <button>☰</button>
           <h1>brick-busybox</h1>
-          <button>?</button>
+          <button id="showAbout">?</button>
         </brick-appbar>
+
+        <brick-action source="showAbout" target="about" action="show"></brick-action>
+
+        <brick-dialog id="about">
+          <header><h1>About</h1></header>
+          <section center>
+            This is an app that attempts to use all brick components
+          </section>
+          <footer>
+            <brick-action target="about" action="hide">
+              <button>Ok</button>
+            </brick-action>
+          </footer>
+        </brick-dialog>
 
       </header>
 
@@ -41,7 +58,7 @@
           <brick-tabbar-tab target="card-select">
             <i class="fa fa-keyboard-o"></i> Forms
           </brick-tabbar-tab>
-          <brick-tabbar-tab target="card-flipbox" selected>
+          <brick-tabbar-tab target="card-flipbox">
             <i class="fa fa-rotate-right"></i> Flipbox
           </brick-tabbar-tab>
           <brick-tabbar-tab target="card-calendar">
@@ -53,14 +70,14 @@
           <brick-tabbar-tab target="card-menu">
             <i class="fa fa-bars"></i> Menu
           </brick-tabbar-tab>
-          <brick-tabbar-tab target="card-indexeddb">
+          <brick-tabbar-tab target="card-indexeddb" selected>
             <i class="fa fa-database"></i> IndexedDB
           </brick-tabbar-tab>
         </brick-tabbar>
 
         <brick-deck id="deck1">
 
-          <brick-card id="card-select" selected>
+          <brick-card id="card-select">
 
             <form>
 
@@ -177,13 +194,6 @@
             <brick-progressbar showStatus value="20"></brick-progressbar>
             <brick-progressbar showStatus value="15" striped></brick-progressbar>
             <brick-progressbar showStatus value="20" striped active></brick-progressbar>
-            <!--
-            <brick-progressbar showStatus value="20" striped active type="success"></brick-progressbar>
-            <brick-progressbar showStatus value="20" striped active type="info"></brick-progressbar>
-            <brick-progressbar showStatus value="20" striped active type="danger"></brick-progressbar>
-            <brick-progressbar showStatus value="20" striped active type="warning"></brick-progressbar>
-            <brick-progressbar showStatus id="p1" value="20" striped active></brick-progressbar>
-            -->
             <button onclick="document.getElementById('p1').value=40;"><b>Click to Set 40%</b></button>
             <brick-progressbar showStatus min="100" max="900" id="p2" value="300" striped active></brick-progressbar>
             <button onclick="document.getElementById('p2').value=800;"><b>Click to Set 800</b></button>
@@ -202,66 +212,53 @@
             <button onclick="document.getElementById('p4').type='danger';">Danger</button>
           </brick-card>
 
-          <brick-card id="card-indexeddb">
+          <brick-card id="card-indexeddb" selected>
 
             <p>This is a messy all-in-one demo that wires together
             brick-storage-indexeddb, brick-action, and brick-form along with a
             busybox demo component.</p>
 
-            <brick-storage-indexeddb id="db" name="demo-db-2" keyname="_id"></brick-storage-indexeddb>
+            <brick-storage-indexeddb id="db"
+              name="demo-db-2" keyname="_id"></brick-storage-indexeddb>
 
-            <busybox-storage-demo id="thingy" storage="db"></busybox-storage-demo>
+            <busybox-storage-demo id="demo-component"
+              storage="db" item-menu="item-choices"
+              edit-form="editForm"></busybox-storage-demo>
 
             <p>
-              <brick-action target="thingy" action="clear">
-                <button>Clear data</button>
+              <brick-action target="demo-component" action="setData">
+                <button>Put data</button>
               </brick-action>
 
-              <brick-action target="thingy" action="dump">
+              <brick-action target="demo-component" action="editData">
+                <button>Edit data</button>
+              </brick-action>
+
+              <brick-action target="demo-component" action="dump">
                 <button>Dump data</button>
               </brick-action>
-            </p>
 
-            <p>
-              <brick-action target="thingy" action="set_alpha">
-                <button>Set: alpha</button>
-              </brick-action>
-
-              <brick-action target="thingy" action="set_beta">
-                <button>Set: beta</button>
-              </brick-action>
-
-              <brick-action target="thingy" action="set_gamma">
-                <button>Set: gamma</button>
+              <brick-action target="demo-component" action="clear">
+                <button>Clear data</button>
               </brick-action>
             </p>
 
-            <p>
-              <brick-form id="exampleForm" name="delta" storage="db">
-                <label for="formId">_id:</label>
-                  <input id="formId" type="text">
-                <label for="note">note:</label>
-                  <input type="text" name="note" width="20">
-                <button name="save">Save Form</button>
-              </brick-form>
-            </p>
+            <brick-action-menu id="item-choices">
+              <header>
+                <p>Pick a database ID</p>
+              </header>
+              <menu>
+                <button>Foo</button>
+                <button>Bar</button>
+                <button>Baz</button>
+              </menu>
+            </brick-action-menu>
 
-            <script>
-              var thingy = document.getElementById('thingy');
-              var form = document.getElementById('exampleForm');
-              var formId = document.getElementById('formId');
-
-              formId.value = '';
-
-              formId.addEventListener('change', function (e) {
-                form.name = e.target.value;
-              });
-
-              form.addEventListener('submit', function () {
-                thingy.log("Saving form...");
-                thingy.dump();
-              });
-            </script>
+            <p><brick-form id="editForm" name="" storage="db">
+              <label for="note">note:</label>
+                <input type="text" name="note" width="60">
+              <button name="save">Save</button>
+            </brick-form></p>
 
           </brick-card>
 
