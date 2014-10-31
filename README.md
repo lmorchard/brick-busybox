@@ -17,4 +17,6 @@ gulp watch
 
 ## TODO
 
-* Build the app
+* Use [`<brick-listview>`](https://github.com/mozbrick/brick-listview)
+* Use [`<brick-button>`](https://github.com/mozbrick/brick-button)
+
