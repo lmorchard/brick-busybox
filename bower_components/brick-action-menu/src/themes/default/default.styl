@@ -1,0 +1,57 @@
+@import '../../../bower_components/brick-common/styles/mixins'
+@import '../../../bower_components/brick-common/styles/params'
+@import '../../../bower_components/brick-common/styles/themes/default/params'
+
+$font-small = 14px;
+$font-medium = 17px;
+$font-large = 23px;
+$color-brand-blue = #00caf2;
+
+:host() {
+
+  color: $color-epsilon;
+  font-family: $fontFamilyPrimary;
+  text-align: center;
+
+  --dim-micro: $dim-micro;
+
+  form[role="dialog"] {
+
+    background: rgba(199,199,199,0.85);
+
+    fieldset {
+      background: $color-iota;
+
+      header { padding: $dim-small; }
+
+      menu {
+        button {
+          font-size: $font-medium;
+          background: $color-beta;
+          color: $color-brand-blue;
+        }
+        button:after {
+            height: calc(100% - var(--dim-micro) * 2);
+            top: $dim-micro;
+            background: #e7e7e7;
+        }
+        button:active {
+            background-color: $color-brand-blue;
+            color: #fff;
+        }
+      }
+
+    }
+  }
+
+  form[role="dialog"].vertical {
+    menu {
+      button:after {
+          width: calc(100% - var(--dim-micro) * 2);
+          left: $dim-micro;
+          background: #e7e7e7;
+      }
+    }
+  }
+
+}

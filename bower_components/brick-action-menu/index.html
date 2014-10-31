@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+    <title>brick-action-menu</title>
+
+    <!-- Importing Polyfill -->
+    <script src="bower_components/platform/platform.js"></script>
+
+    <!-- Importing Custom Elemenent -->
+    <link rel="import" href="dist/brick-action-menu.local.html">
+
+    <style type="text/css">
+      textarea#log {
+        width: 75%;
+        height: 25ex;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>brick-action-menu demo</h1>
+
+    <p>This is a demo of the brick-action-menu web component!</p>
+
+    <h2>Menus</h2>
+
+    <ul id="show-examples">
+      <li><button id="ex1" data-show="menu-ex1">Show Example #1: Simple</button></li>
+    </ul>
+
+    <h2>Results</h2>
+    <textarea id="log"></textarea>
+
+    <section id="menus">
+
+      <brick-action-menu id="menu-ex1">
+        <header>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+            eu mollis tortor.</p>
+        </header>
+        <menu>
+          <button>Action 1</button>
+          <button>Action 2</button>
+          <button>Action 3</button>
+          <button>Cancel</button>
+        </menu>
+      </brick-action-menu>
+    </section>
+
+    <script type="text/javascript">
+
+      document.addEventListener('WebComponentsReady', function () {
+
+        var menu = document.getElementById('menu-ex1');
+
+        // Menus emit a 'pick' event when an item is clicked.
+        menu.addEventListener('pick', function (e) {
+          _log("Menu event 'pick': " + e.target.innerHTML);
+        });
+
+        var buttons = menu.querySelectorAll('button');
+        for (var i = 0; i < buttons.length; i++) {
+          (function (button) {
+            // Buttons emit 'click' events like usual.
+            button.addEventListener('click', function () {
+              _log("Button event 'click': " + button.innerHTML);
+            });
+          })(buttons[i]);
+        }
+
+        document.getElementById('ex1').addEventListener('click', function (e) {
+
+          // menu.show() reveals the menu, accepts an optional callback
+          menu.show(function (button) {
+            _log("Callback: " + button.innerHTML);
+          });
+
+        });
+
+      });
+
+      // Quick-and-dirty logging for when devtools are closed
+      var logEL = document.getElementById('log');
+      logEL.value = '';
+      function _log (msg) {
+        console.log(msg);
+        logEL.value += Date.now() + ' - ' + msg + "\n";
+        logEL.scrollTop = logEL.scrollHeight;
+      }
+
+    </script>
+
+  </body>
+</html>
